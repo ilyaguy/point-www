@@ -113,6 +113,7 @@ class UrlPattern(Pattern):
         print '>>> ',um
         if um:
             deviantart_url = um.groups(0)[0]
+            print '>>> ', deviantart_url
             deviantart_preview = DeviantArtPreview()
             return deviantart_preview.deviant_preview(deviantart_url)
 
@@ -243,9 +244,9 @@ def markdown_filter(environ, text, img=False):
 
     mdstring = md.convert(text)
 
-    if settings.cache_markdown:
-        cache_store('md:%s' % h, mdstring, 3600)
-    return mdstring
+    #if settings.cache_markdown:
+    #    cache_store('md:%s' % h, mdstring, 3600)
+    #return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
 
