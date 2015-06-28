@@ -59,6 +59,7 @@ class UrlPattern(Pattern):
 
     def handleMatch(self, m):
         url = m.group('url')
+        print '\n\n', url
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
@@ -109,6 +110,7 @@ class UrlPattern(Pattern):
 
         # deviantart
         um = re.search("(https?\://(?:[a-zA-Z0-9_.-]+\.)?(?:deviantart\.com\/art/[a-zA-Z0-9_.-]+))", url, re.I)
+        print '>>> ',um
         if um:
             deviantart_url = um.groups(0)[0]
             deviantart_preview = DeviantArtPreview()
