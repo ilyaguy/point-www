@@ -7,7 +7,7 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern, ColonLinkPattern
+                          StrikePattern, ColonLinkPattern, DeviantArtPreview
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
@@ -105,6 +105,13 @@ class UrlPattern(Pattern):
                                '&amp;color=999999') % (um.group('id')))
             iframe.set('frameborder', '0')
             return wrap
+
+        # deviantart
+        um = re.search("(https?\://(?:[a-zA-Z0-9_.-]+\.)?(?:deviantart\.com\/art/[a-zA-Z0-9_.-]+))", url, re.I)
+        if um:
+            deviantart_url = um.groups(0)[0]
+            deviantart_preview = DeviantArtPreview()
+            return deviantart_preview.deviant_preview(deviantart_url)
 
         # youtube iframe
         um = re.search("(?:youtube\.com\/watch\?v=(?P<id1>[\w-]+)(?:&(?P<params>.+))?)|(youtu.be/(?P<id2>[\w-]+))", url, re.I)
