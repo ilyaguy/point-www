@@ -115,7 +115,9 @@ class UrlPattern(Pattern):
             deviantart_url = um.groups(0)[0]
             print '>>> ', deviantart_url
             deviantart_preview = DeviantArtPreview()
-            return deviantart_preview.deviant_preview(deviantart_url)
+            wrap = deviantart_preview.deviant_preview(deviantart_url)
+            print wrap
+            return wrap
 
         # youtube iframe
         um = re.search("(?:youtube\.com\/watch\?v=(?P<id1>[\w-]+)(?:&(?P<params>.+))?)|(youtu.be/(?P<id2>[\w-]+))", url, re.I)
