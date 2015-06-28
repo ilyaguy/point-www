@@ -59,7 +59,6 @@ class UrlPattern(Pattern):
 
     def handleMatch(self, m):
         url = m.group('url')
-        print '\n\n', url
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
@@ -237,18 +236,18 @@ def markdown_filter(environ, text, img=False):
     if not text:
         return ''
 
-    #if settings.cache_markdown:
-    #    h = md5(text.encode('utf-8')).hexdigest()
-    #    mdstring = cache_get('md:%s' % h)
+    if settings.cache_markdown:
+        h = md5(text.encode('utf-8')).hexdigest()
+        mdstring = cache_get('md:%s' % h)
 
-    #    if mdstring:
-    #        return mdstring
+        if mdstring:
+            return mdstring
 
     mdstring = md.convert(text)
 
-    #if settings.cache_markdown:
-    #    cache_store('md:%s' % h, mdstring, 3600)
-    #return mdstring
+    if settings.cache_markdown:
+        cache_store('md:%s' % h, mdstring, 3600)
+    return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
 
