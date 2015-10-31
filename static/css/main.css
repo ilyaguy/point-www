@@ -658,6 +658,13 @@ img.avatar {
     /*font-weight: bold;*/
 }
 
+@media (max-width: 800px) {
+    #subheader > a,
+    #subheader > span {
+        font-size: 0.75em;
+    }
+}
+
 #subheader > .active {
     color: #444444;
 }
